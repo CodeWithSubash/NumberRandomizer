@@ -48,7 +48,7 @@ namespace NumberGenerator
         {
             int n = 4;
             int repeat = 600000;
-            Console.WriteLine("\n-- Randomness Test (Simple Shuffling) --");
+            Console.WriteLine("\n-- Randomness Test (Optimal Shuffling) --");
             ArrayShufflerStressTest.DoRandomnessTest(n, repeat);
         }
 
