@@ -18,9 +18,21 @@ namespace NumberGenerator
         /// </summary>
         public void DoOptimalShuffle(int[] data)
         {
+            var random = new Random();
             for (int index = data.Length - 1; index > 0; index--)
             {
-                int randomPosition = new Random().Next(index+1);
+                // Approach 1: Using random ctor inside tight loop
+                // Issue: Each time it uses the same seed (i.e. ticks) so the random will not be pure
+                // var random = new Random();
+
+                //Approach 2: Initialize Random outside tight loop, and only use next()
+                // Better: Each time next() is called there will be newer random output
+                //random.Next(index + 1);
+
+                //Approach 3: Initialize the random() number using the Guid inside loop
+                // Best: provides the perfect output (caveat: as some delay is added)
+                random = new Random(Guid.NewGuid().GetHashCode());
+                int randomPosition = random.Next(index+1);
                 (data[index], data[randomPosition]) = (data[randomPosition], data[index]);
             }
         }
