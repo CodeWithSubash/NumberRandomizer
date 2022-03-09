@@ -11,6 +11,7 @@ namespace NumberGenerator
         static void Main(string[] args)
         {
             // Driver Code
+            // TODO Use command line to input the parameter and check for the validity
             int n = 4;
             Console.WriteLine("-- Approach1: Use simple shuffling algorithm --");
             Console.WriteLine(string.Join(",", BasicAlgorithm(n)));
@@ -19,9 +20,11 @@ namespace NumberGenerator
             Console.WriteLine(string.Join(",", OptimalAlgorithm(n)));
 
             // Some Load Tests
+            Console.WriteLine("\n-- Stress Test Comparison Simple V/S Optimal Solution --");
             PerformLoadTests();
 
-            // Perform randomness shuffling test
+            // Some Randomness Tests
+            Console.WriteLine("\n-- Randomness Test for high number of repetitions --");
             PerformRandomnessTests();
 
             Console.WriteLine("End Of Program !!!");
@@ -30,33 +33,36 @@ namespace NumberGenerator
 
         private static int[] OptimalAlgorithm(int n)
         {
-            
-            int[] data = Utility.GenerateData(n);
+            int[] data = Enumerable.Range(1, n).ToArray();
             new ArrayShuffler().DoOptimalShuffle(data);
             return data;
         }
 
         private static int[] BasicAlgorithm(int n)
         {
-            
-            int[] data = Utility.GenerateData(n);
+            int[] data = Enumerable.Range(1, n).ToArray();
             new ArrayShuffler().DoSimpleShuffle(data);
             return data;
+        }
+
+        private static void PerformLoadTests()
+        {
+            var result = ArrayShufflerStressTest.CompareRunTime(new int[]
+                { 100, 1000, 10000, 100000, 1000000 });
+
+            // Print the comparative results
+            PrintUtility.PrintResults(result);
         }
 
         private static void PerformRandomnessTests()
         {
             int n = 4;
-            int repeat = 600000;
-            Console.WriteLine("\n-- Randomness Test (Optimal Shuffling) --");
-            ArrayShufflerStressTest.DoRandomnessTest(n, repeat);
-        }
+            int[] data = Enumerable.Range(1, n).ToArray();
+            int repetition = 60000;
+            var result = ArrayShufflerRandomnessTest.DoRandomnessTest(data, repetition);
 
-        private static void PerformLoadTests()
-        {
-            Console.WriteLine("\n-- Stress Test --");
-            ArrayShufflerStressTest.CompareRunTimeWithIncreasingN(new int[]
-                { 100, 1000, 10000, 100000, 1000000 });
+            // Print the comparative results
+            PrintUtility.PrintResults(result);
         }
     }
 }

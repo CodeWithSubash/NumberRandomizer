@@ -50,10 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayShuffler.cs" />
+    <Compile Include="ArrayShufflerRandomnessTest.cs" />
     <Compile Include="ArrayShufflerStressTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility.cs" />
+    <Compile Include="PrintUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

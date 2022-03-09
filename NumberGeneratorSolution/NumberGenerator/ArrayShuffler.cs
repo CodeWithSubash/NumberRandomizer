@@ -16,24 +16,36 @@ namespace NumberGenerator
         /// Then swap number from randomly chosen position and current index (from remaining array excluding lastly swapped position)
         /// This way, every time we swap with random number generated from remaining array only 
         /// </summary>
-        public void DoOptimalShuffle(int[] data)
+        public void DoOptimalShuffle(int[] data, int option = 3)
         {
             var random = new Random();
             for (int index = data.Length - 1; index > 0; index--)
             {
+                if (option != 3)
+                {
+                    random = ConstructRandom(option);
+                }
+                int randomPosition = random.Next(index + 1);
+                (data[index], data[randomPosition]) = (data[randomPosition], data[index]);
+            }
+        }
+
+        private Random ConstructRandom(int option)
+        {
+            switch (option)
+            {
                 // Approach 1: Using random ctor inside tight loop
                 // Issue: Each time it uses the same seed (i.e. ticks) so the random will not be pure
-                // var random = new Random();
-
+                case 1:
+                    return new Random();
                 //Approach 2: Initialize Random outside tight loop, and only use next()
                 // Better: Each time next() is called there will be newer random output
-                //random.Next(index + 1);
-
+                case 2:
+                    return new Random(Guid.NewGuid().GetHashCode());
                 //Approach 3: Initialize the random() number using the Guid inside loop
                 // Best: provides the perfect output (caveat: as some delay is added)
-                random = new Random(Guid.NewGuid().GetHashCode());
-                int randomPosition = random.Next(index+1);
-                (data[index], data[randomPosition]) = (data[randomPosition], data[index]);
+                default:
+                    return null;
             }
         }
 

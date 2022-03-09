@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ArrayShufflerUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ArrayShufflerRandomnessTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
