@@ -15,6 +15,8 @@ The main logic is to pick the random number from the remaining array list, and p
 4. Set n=n-1
 5. Repeat step t to 4
 
+Ref: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+
 ## Using the random method
 ### Approach1: Constructing random object inside tight loop
 - When we are inside the tight loop, every time the random object is constructed with the same seed values (C# uses the ticks)  
